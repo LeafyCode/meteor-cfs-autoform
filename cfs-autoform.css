@@ -1,8 +1,15 @@
 /* CSS declarations go here */
-.cfsaf-hidden {
-	display: none !important;
-}
 
+.cfsaf-hidden {
+  display: none !important;
+}
 .cfsaf-field {
-	cursor: pointer !important;
+  cursor: pointer !important;
+}
+.af-file-preview {
+  width: 50%;
+  display: block;
+  border: 1px solid #ddd;
+  padding: 4px;
+  margin-bottom: 14px;
 }

@@ -17,7 +17,7 @@ if (Meteor.isClient) {
   AutoForm.addInputType("cfs-file", {
     template:"cfsFileField",
     valueOut: function () {
-      return "dummyId";
+      return 'dummyId';
     },
     contextAdjust: function (context) {
       context.atts.placeholder = context.atts.placeholder || "Click to upload a file or drop it here";
@@ -54,7 +54,38 @@ if (Meteor.isClient) {
 
   Template.cfsFileField_bootstrap3.helpers({
     textInputAtts: textInputAtts,
-    fileInputAtts: fileInputAtts
+    fileInputAtts: fileInputAtts,
+    value: function() {
+      var id = Template.currentData().value
+      if(id) {
+        return id
+      } else {
+        return null
+      }
+    },
+    available: function() {
+      return Template.currentData().value !== ''
+    },
+    url: function () {
+      var id = Template.currentData().value
+
+      if(id) {
+        var collection = FS._collections[this.atts.collection]
+
+        var file = collection.findOne({ _id: id })
+        var fileType = file.type()
+
+        if(fileType.match(/image/g)) {
+          return file.url()
+        } else {
+          return false
+        }
+      } else {
+        return false
+      }
+
+
+    },
   });
 
   Template.cfsFilesField_bootstrap3.helpers({
@@ -98,7 +129,10 @@ if (Meteor.isClient) {
       template.$('.cfsaf-hidden').click();
     },
     'change .cfsaf-hidden': singleHandler,
-    'dropped .cfsaf-field': singleHandler
+    'dropped .cfsaf-field': singleHandler,
+    'click .af-remove-file': function(event, template) {
+      // Remove the file
+    }
   });
 
   var multipleHandler = function (event, template) {

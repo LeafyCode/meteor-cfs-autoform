@@ -207,7 +207,7 @@ Hooks = {
     if (totalFiles === 0) {
       return doc;
     }
-    
+
     // Create the callback that will be called either
     // upon file insert error or upon each file being uploaded.
     var doneFiles = 0;
@@ -249,7 +249,7 @@ Hooks = {
         }
       }
     }
-    
+
     // Loop through all hidden file fields, inserting
     // and uploading all files that have been attached to them.
     template.$('.cfsaf-hidden').each(function () {

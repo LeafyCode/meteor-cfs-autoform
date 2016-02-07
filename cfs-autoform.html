@@ -1,5 +1,9 @@
 <template name="cfsFileField_bootstrap3">
-  <input type="file" class="cfsaf-hidden" data-cfs-collection="{{this.atts.collection}}" {{fileInputAtts}}>
+  <input type="text" filename="" class="cfsaf-hidden" data-cfs-collection="{{this.atts.collection}}" {{fileInputAtts}}>
+  {{#if url}}
+    <img src="{{url}}" alt="Preview" class="af-file-preview">
+      <a href="#" class="af-remove-file"><i class="fa fa-times"></i> Remove file</a>
+  {{/if}}
   <input type="text" readonly {{textInputAtts}}>
 </template>
 
