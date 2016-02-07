@@ -64,17 +64,24 @@ if (Meteor.isClient) {
       }
     },
     available: function() {
-      return Template.currentData().value !== ''
-    },
-    url: function () {
+      // If there's a file attached
       var id = Template.currentData().value
 
-      if(id) {
+      return id
+    },
+    url: function () {
+      // Get the id of the file
+      var id = Template.currentData().value
+
+      // If there's a file...
+      if (id) {
+        // Get the file and the file data
         var collection = FS._collections[this.atts.collection]
 
         var file = collection.findOne({ _id: id })
         var fileType = file.type()
 
+        // If the file is a image return the url
         if(fileType.match(/image/g)) {
           return file.url()
         } else {
@@ -131,7 +138,16 @@ if (Meteor.isClient) {
     'change .cfsaf-hidden': singleHandler,
     'dropped .cfsaf-field': singleHandler,
     'click .af-remove-file': function(event, template) {
-      // Remove the file
+      // When the remove link is clicked...
+      event.preventDefault();
+
+      // Set the data attributes marking it for removal upon save
+      // Actual removing will happen only if saved through hooks
+      template.$('.cfsaf-hidden').data('remove', 'true');
+
+      // Remove the file preview and the remove link
+      template.$('.af-file-preview').fadeOut();
+      template.$(event.target).fadeOut();
     }
   });
 

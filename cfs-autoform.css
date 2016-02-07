@@ -13,3 +13,9 @@
   padding: 4px;
   margin-bottom: 14px;
 }
+.input-cont {
+  display: flex;
+}
+.af-remove-file {
+  margin-right: 5px;
+}

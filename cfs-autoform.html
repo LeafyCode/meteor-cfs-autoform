@@ -1,10 +1,18 @@
 <template name="cfsFileField_bootstrap3">
-  <input type="file" class="cfsaf-hidden" data-cfs-collection="{{this.atts.collection}}" {{fileInputAtts}}>
+  <input type="file" class="cfsaf-hidden" data-cfs-collection="{{this.atts.collection}}" data-remove="false" {{fileInputAtts}}>
+
+  <!-- Show the image preview only if the file is a image  -->
   {{#if url}}
     <img src="{{url}}" alt="Preview" class="af-file-preview">
-      <a href="#" class="af-remove-file"><i class="fa fa-times"></i> Remove file</a>
   {{/if}}
-  <input type="text" readonly {{textInputAtts}}>
+
+  <!-- If there's a file attached show the remove link -->
+  <div class="input-cont">
+    {{#if available}}
+      <a href="#" class="af-remove-file btn btn-danger"><i class="fa fa-times"></i> Remove file</a>
+    {{/if}}
+    <input type="text" readonly {{textInputAtts}}>
+  </div>
 </template>
 
 <template name="cfsFilesField_bootstrap3">

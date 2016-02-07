@@ -183,8 +183,13 @@ Hooks = {
         CfsAutoForm.Util.deepDelete(doc,key);
       }
 
+      // If there are no files and if the user have clicked the remove link,
+      // remove the file
+      else if ( elem.data("remove") ) {
+        doc.$set[key] = '';
+
       // Otherwise it might be a multiple files field
-      else {
+      } else {
         var fileListList = elem.data("cfsaf_files_multi");
         if (fileListList) {
           //we delete the id only if we uploaded another file
